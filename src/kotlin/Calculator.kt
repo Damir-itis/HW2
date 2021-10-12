@@ -1,13 +1,10 @@
-package kotlin
-import jdk.internal.*
-
-class Calculator {
-     fun calculate(value1: Int, operator: String, value2: Int): Int {
+class Calculator{
+    fun calculate(val1: Int, operator: String, val2: Int): Int {
         return when (operator) {
-            "+" -> value1 + value2
-            "-" -> value1 - value2
-            "/" -> value1 / value2
-            "*" -> value1 * value2
+            "+" -> val1 + val2
+            "-" -> val1 - val2
+            "*" -> val1 * val2
+            "/" -> val1 / val2
             else -> 0
         }
     }

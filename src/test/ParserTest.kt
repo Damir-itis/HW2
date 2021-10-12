@@ -1,46 +1,56 @@
-package test
-import org.junit.Rule
-import org.junit.Test
-import org.junit.contrib.java.lang.system.ExpectedSystemExit
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+import java.util.*
 
 class ParserTest {
-    @Rule
-    val exit = ExpectedSystemExit.none()
+
+    private val parser = Parser()
+
     @Test
-    fun parseOperatorOrErrorPlus() {
-        val operator = "+"
-        Parser.parseOperatorOrError(operator)
+    fun parseOperatorTestPlus() {
+        val plus: String = parser.parseOperatorOrError("+")
+        Assertions.assertEquals("+", plus)
     }
 
     @Test
-    fun parseOperatorOrErrorMinus() {
-        val operator = "-"
-        Parser.parseOperatorOrError(operator)
+    fun parseOperatorTestMinus() {
+        val minus: String = parser.parseOperatorOrError("-")
+        Assertions.assertEquals("-", minus)
     }
 
     @Test
-    fun parseOperatorOrErrorMultiplication() {
-        val operator = "*"
-        Parser.parseOperatorOrError(operator)
+    fun parseOperatorTestMultiply() {
+        val multiply: String = parser.parseOperatorOrError("*")
+        Assertions.assertEquals("*", multiply)
     }
 
     @Test
-    fun parseOperatorOrErrorDivision() {
-        val operator = "/"
-        Parser.parseOperatorOrError(operator)
+    fun parseOperatorTestDivide() {
+        val div: String = parser.parseOperatorOrError("/")
+        Assertions.assertEquals("/", div)
+    }
+
+
+    @Test
+    fun parseOperatorTestError() {
+        Assertions.assertThrows(InvalidPropertiesFormatException::class.java) { parser.parseOperatorOrError("d") }
     }
 
     @Test
-    fun parseOperatorOrError() {
-        val operator = "%"
-        exit.expectSystemExitWithStatus(3)
-        Parser.parseOperatorOrError(operator)
+    fun parseIntTestSuccess() {
+        val num: Int = parser.parseIntOrError("555")
+        Assertions.assertEquals(555, num)
     }
 
     @Test
-    fun parseIntOrError() {
-        val string = "D"
-        exit.expectSystemExitWithStatus(2)
-        Parser.parseIntOrError(string)
+    fun parseIntTestError() {
+        Assertions.assertThrows(NumberFormatException::class.java) { parser.parseIntOrError("five") }
+    }
+
+    @Test
+    fun countOfArgumentsCheckerTest() {
+        Assertions.assertThrows(InvalidPropertiesFormatException::class.java) {
+            parser.countOfArgumentsChecker(arrayOf("5","7"))
+        }
     }
 }

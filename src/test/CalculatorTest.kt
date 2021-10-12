@@ -1,40 +1,37 @@
-package test
-
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class CalculatorTest {
+
+    private val calculator = Calculator()
+
     @Test
-    fun calculatePlus() {
-        val val1 = 2
-        val val2 = -4
-        val operator = "+"
-        assertEquals((val1 + val2).toLong(), Calculator.calculate(val1, operator, val2).toLong())
-        assertEquals(0, Calculator.calculate(val2, "e", val1).toLong())
+    fun calc_2Plus5_7Returned() {
+        val res: Int = calculator.calculate(2, "+", 5)
+        Assertions.assertEquals(7, res)
     }
 
     @Test
-    fun calculateMinus() {
-        val val1 = 2
-        val val2 = -4
-        val operator = "-"
-        
-        assertEquals((val1 - val2).toLong(), Calculator.calculate(val1, operator, val2).toLong())
+    fun calc_2Multiply5_10Returned() {
+        val res: Int = calculator.calculate(2, "*", 5)
+        Assertions.assertEquals(10, res)
     }
 
     @Test
-    fun calculateMultiplication() {
-        val val1 = 2
-        val val2 = -4
-        val operator = "*"
-        assertEquals((val1 * val2).toLong(), Calculator.calculate(val1, operator, val2).toLong())
+    fun calc_7Minus5_2Returned() {
+        val res: Int = calculator.calculate(7, "-", 5)
+        Assertions.assertEquals(2, res)
     }
 
     @Test
-    fun calculateDivision() {
-        val val1 = 2
-        val val2 = -4
-        val operator = "/"
-        assertEquals((val2 / val1).toLong(), Calculator.calculate(val2, operator, val1).toLong())
+    fun calc_6Divide3_2Returned() {
+        val res: Int = calculator.calculate(6, "/", 3)
+        Assertions.assertEquals(2, res)
+    }
+
+    @Test
+    fun calc_default() {
+        val res: Int = calculator.calculate(6, ":", 3)
+        Assertions.assertEquals(0, res)
     }
 }
